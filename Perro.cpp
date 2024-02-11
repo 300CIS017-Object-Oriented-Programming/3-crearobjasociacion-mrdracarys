@@ -2,11 +2,6 @@
 #include <iostream>
 
 
-// Ejemplo de constructor por defecto con lista inicializadora
-// Perro::Perro() : edad(0), raza(""), tamanio(""), color("") {}
-
-// Ejemplo de constructor por defecto iniciando los atributos en el cuerpo del constructor
-
 Perro::Perro(std::string nombre, int edad, std::string raza, std::string color, std::string tamanio)
         : nombre(nombre), edad(edad), raza(raza), color(color), tamanio(tamanio), pPropietario(nullptr) {}
 
@@ -71,6 +66,18 @@ Perro::~Perro() {
     delete pPropietario;
 }
 
+void Perro::asociarVeterinario(std::string nombre, int aniosExperiencia) {
 
-
+    this->pVeterinario = new Veterinario(nombre, aniosExperiencia);
+}
+Veterinario* Perro::getVeterinario() {
+    return this->pVeterinario;
+}
+void Perro::mostrarInfoVeterinario() {
+    if (pVeterinario != nullptr) {
+        std::cout << "Veterinario: " << pVeterinario->getNombre() << ", Experiencia: " << pVeterinario->getAniosExperiencia() << " años" << std::endl;
+    } else {
+        std::cout << "Este perro no tiene asignado un veterinario." << std::endl;
+    }
+}
 

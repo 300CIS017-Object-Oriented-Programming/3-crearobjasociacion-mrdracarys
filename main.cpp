@@ -29,9 +29,11 @@ int main() {
 
     Perro*kuma=new Perro("kuma", 5,"lobo", "gris", "mediano");
     Propietario *juan = new Propietario("Juan Camilo");
-    carlos->setDocIdentidad("1085343676");
-    carlos->setEdad(25);
+    juan->setDocIdentidad("1085343676");
+    juan->setEdad(25);
     std::cout << juan->mostrarInfo() << std::endl;
+    kuma->asociarVeterinario("Dr. Gonzalo", 8);
+    kuma->mostrarInfoVeterinario();
     delete kuma;
     delete juan;
 
