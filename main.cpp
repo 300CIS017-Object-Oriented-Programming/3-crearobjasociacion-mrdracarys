@@ -1,41 +1,53 @@
 #include <iostream>
 #include "Perro.h"
 #include "Propietario.h"
+#include "Raza.h"
 
 int main() {
-/*
-    // Instanciar
-    Perro firulais;
-    firulais.setNombre("Firulais");
-    firulais.setColor("Negro");
-    firulais.setEdad(5);
-    firulais.setTamanio("Grande");
-    firulais.setRaza("Mastin napolitano");
-    //Agregar un nuevo pPropietario a Firulais
-    firulais.agregarPropietario("Carlos Zapata", "102842313");
-    // Consultar el nombre del pPropietario del perro Firulais
-    std::cout<< "El nombre del pPropietario del perro "<<firulais.getNombre() << " es " << firulais.getPropietario()->getNombre()<<std::endl;
-*/
-
-
-    Perro *chamo = new Perro("Firulais", 5, "Mastin napolitano", "Negro", "Grande");
-    chamo->ladrar();
-    Propietario *carlos = new Propietario("Carlos Zapata");
-    carlos->setDocIdentidad("102842313");
-    carlos->setEdad(30);
-    std::cout << carlos->mostrarInfo() << std::endl;
-    delete chamo;
-    delete carlos;
-
-    Perro*kuma=new Perro("kuma", 5,"lobo", "gris", "mediano");
-    Propietario *juan = new Propietario("Juan Camilo");
+    // Creación de Kuma con raza
+    Perro* kumaPropietario = new Perro("Kuma", 2, "Lobo", "Gris", "Mediano");
+    Propietario* juan = new Propietario("Juan Camilo");
     juan->setDocIdentidad("1085343676");
     juan->setEdad(25);
     std::cout << juan->mostrarInfo() << std::endl;
-    kuma->asociarVeterinario("Dr. Gonzalo", 8);
-    kuma->mostrarInfoVeterinario();
-    delete kuma;
+    kumaPropietario->asociarVeterinario("Dr. Gonzalo", 8);
+    kumaPropietario->mostrarInfoVeterinario();
+
+    // Obtén el objeto Raza asociado al Perro
+    Raza* razaKuma = new Raza("Border collie", "Colombia");
+    kumaPropietario->setRaza(razaKuma);
+
+    std::cout << "Información de Kuma:" << std::endl;
+    std::cout << "Nombre: " << kumaPropietario->getNombre() << std::endl;
+    std::cout << "Edad: " << kumaPropietario->getEdad() << " años" << std::endl;
+
+    // Imprimir información de la raza solo si está asignada
+    Raza* razaAsignadaKuma = kumaPropietario->getRaza();
+    if (razaAsignadaKuma) {
+        std::cout << "Raza: " << razaAsignadaKuma->getNombre() << std::endl;
+        std::cout << "País de origen de la raza: " << razaAsignadaKuma->getPaisOrigen() << std::endl;
+    } else {
+        std::cout << "El perro no tiene asignada una raza." << std::endl;
+    }
+
+    // Creación de Chamo sin raza asignada
+    Perro* chamo = new Perro("Chamo", 5, "", "Negro", "Grande");
+    chamo->ladrar();
+    Propietario* carlos = new Propietario("Carlos Zapata");
+    carlos->setDocIdentidad("102842313");
+    carlos->setEdad(30);
+    std::cout << carlos->mostrarInfo() << std::endl;
+    std::cout << "Información de Chamo:" << std::endl;
+    std::cout << "Nombre: " << chamo->getNombre() << std::endl;
+    std::cout << "Edad: " << chamo->getEdad() << " años" << std::endl;
+
+
+
+    // Liberar memoria
+    delete kumaPropietario;
     delete juan;
+    delete chamo;
+    delete razaKuma;
 
     return 0;
 }
